@@ -1,9 +1,8 @@
 plugins {
     id("com.android.application")
-    // Kotlin Android Plugin declared explicitly so Flutter's built-in Kotlin detection
-    // finds it on the classpath (version 2.3.20 is provided by the root plugins block).
-    id("org.jetbrains.kotlin.android")
-    // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.
+    // The Flutter Gradle Plugin must be applied after the Android Gradle plugin.
+    // Note: AGP 9.0+ bundles Kotlin support, so 'org.jetbrains.kotlin.android'
+    // must NOT be applied here (removed to avoid the AGP 9.0 incompatibility).
     id("dev.flutter.flutter-gradle-plugin")
 }
 
@@ -34,12 +33,6 @@ android {
             // Signing with the debug keys for now, so `flutter run --release` works.
             signingConfig = signingConfigs.getByName("debug")
         }
-    }
-}
-
-kotlin {
-    compilerOptions {
-        jvmTarget = org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17
     }
 }
 
