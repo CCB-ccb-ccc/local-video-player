@@ -16,7 +16,10 @@ jobs:
         uses: android-actions/setup-android@v3
 
       - name: Install Android SDK platform 37
-        run: sdkmanager "platforms;android-37"
+        # android-37 has multiple revisions (37.0, 37.1); the bare
+        # "platforms;android-37" path is ambiguous and fails, so pin the
+        # exact stable revision that permission_handler_android 14 requires.
+        run: sdkmanager "platforms;android-37.1"
 
       - name: Set up Java (JDK 17)
         uses: actions/setup-java@v4
