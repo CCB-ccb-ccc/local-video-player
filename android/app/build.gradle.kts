@@ -1,8 +1,7 @@
 plugins {
     id("com.android.application")
-    // AGP 8.7 requires the Kotlin Android plugin to be applied explicitly
-    // (AGP 9.0+ bundles Kotlin, but we pin 8.7 for plugin-ecosystem compatibility).
-    id("org.jetbrains.kotlin.android")
+    // AGP 9.0+ provides built-in Kotlin, so the kotlin-android plugin must NOT be
+    // applied here (app and all plugins now use AGP 9.0's built-in Kotlin).
     id("dev.flutter.flutter-gradle-plugin")
 }
 
@@ -33,12 +32,6 @@ android {
             // Signing with the debug keys for now, so `flutter run --release` works.
             signingConfig = signingConfigs.getByName("debug")
         }
-    }
-}
-
-kotlin {
-    compilerOptions {
-        jvmTarget = org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17
     }
 }
 
