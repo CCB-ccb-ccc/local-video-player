@@ -5,7 +5,7 @@
 import FlutterMacOS
 import Foundation
 
-import file_picker
+import file_picker_darwin
 import package_info_plus
 import video_player_avfoundation
 import wakelock_plus

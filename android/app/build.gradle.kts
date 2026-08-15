@@ -7,7 +7,10 @@ plugins {
 
 android {
     namespace = "com.localplayer.local_video_player"
-    compileSdk = flutter.compileSdkVersion
+    // permission_handler_android 14.0.0 requires compileSdk >= 37 (Android 15).
+    // The CI Flutter toolchain's flutter.compileSdkVersion resolves lower, so we
+    // pin explicit values to satisfy the checkDebugAarMetadata SDK requirement.
+    compileSdk = 37
     ndkVersion = flutter.ndkVersion
 
     compileOptions {
@@ -21,7 +24,7 @@ android {
         // You can update the following values to match your application needs.
         // For more information, see: https://flutter.dev/to/review-gradle-config.
         minSdk = flutter.minSdkVersion
-        targetSdk = flutter.targetSdkVersion
+        targetSdk = 37
         versionCode = flutter.versionCode
         versionName = flutter.versionName
     }
