@@ -19,11 +19,13 @@ pluginManagement {
 
 plugins {
     id("dev.flutter.flutter-plugin-loader") version "1.0.0"
-    // AGP 8.13.0 keeps the app in the 8.x line (so pub.dev plugins that still
-    // apply the kotlin-android plugin work), while its minimum Gradle is 8.13,
-    // which lets us use Gradle 8.14 to satisfy Flutter 3.44's Gradle >= 8.14 floor.
-    id("com.android.application") version "8.13.0" apply false
-    id("org.jetbrains.kotlin.android") version "2.3.20" apply false
+    // Use the Flutter 3.44 template AGP (9.0.1) + Gradle 9.1.0 (the only Gradle
+    // distribution that reliably downloads on CI). Pin Kotlin Gradle Plugin to
+    // 2.2.20 (NOT 2.3.x): Kotlin 2.3 added a hard block that forbids applying the
+    // kotlin-android plugin on AGP 9.0, which breaks pub.dev plugins like
+    // package_info_plus that still apply it. KGP 2.2.x has no such block.
+    id("com.android.application") version "9.0.1" apply false
+    id("org.jetbrains.kotlin.android") version "2.2.20" apply false
 }
 
 include(":app")
