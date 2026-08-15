@@ -50,15 +50,18 @@ class _VideoListPageState extends State<VideoListPage> {
   }
 
   Future<void> _pick() async {
-    final res = await FilePicker.platform.pickFiles(
+    // file_picker 12.x: pickFiles is a static method and returns List<PlatformFile>?
+    // (no longer wrapped in FilePickerResult, and the .platform accessor is gone).
+    final files = await FilePicker.pickFiles(
       type: FileType.video,
       allowMultiple: true,
     );
-    if (res != null && res.paths.isNotEmpty) {
-      final picked = res.paths.whereType<String>().map((path) {
-        final name = path.split(RegExp(r'[/\\]')).last;
+    if (files.isNotEmpty) {
+      final picked = files.map((f) {
+        final path = f.path ?? '';
+        final name = f.name;
         return VideoItem(path: path, name: name, size: 0);
-      }).toList();
+      }).where((v) => v.path.isNotEmpty).toList();
       if (mounted) {
         setState(() {
           final existing = <String>{for (final v in _videos) v.path};
