@@ -11,16 +11,18 @@ pluginManagement {
     includeBuild("$flutterSdkPath/packages/flutter_tools/gradle")
 
     repositories {
-        maven { url = uri("https://maven.aliyun.com/repository/google") }
-        maven { url = uri("https://maven.aliyun.com/repository/gradle-plugin") }
-        maven { url = uri("https://maven.aliyun.com/repository/public") }
-        maven { url = uri("https://maven.aliyun.com/repository/central") }
+        google()
+        mavenCentral()
+        gradlePluginPortal()
     }
 }
 
 plugins {
     id("dev.flutter.flutter-plugin-loader") version "1.0.0"
-    id("com.android.application") version "9.0.1" apply false
+    // AGP 8.7.0 is the widely-supported version for the current pub.dev plugin
+    // ecosystem (AGP 9.0 forbids applying the kotlin-android plugin that plugins
+    // like package_info_plus still use). Flutter 3.44 requires AGP >= 8.6.0 only.
+    id("com.android.application") version "8.7.0" apply false
     id("org.jetbrains.kotlin.android") version "2.3.20" apply false
 }
 
