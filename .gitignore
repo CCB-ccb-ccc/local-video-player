@@ -51,3 +51,5 @@ _*.tmp
 build_apk.bat
 *.log
 **/build/
+parse_jstack.py
+.gradle/
